@@ -7,7 +7,7 @@ class noteItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      
       padding:const EdgeInsets.only(top: 24,bottom: 24,left: 16),
       decoration: BoxDecoration(
         color: Color(0xffFFCC80),
@@ -27,7 +27,7 @@ class noteItem extends StatelessWidget {
           subtitle: Padding(
             padding: const EdgeInsets.only(top: 16),
             child: Text(
-              'build your career with Ahmed salah',
+              'build your career with\n\nAhmed salah',
               style: TextStyle(
                 color: Colors.black.withOpacity(.5),
                 fontSize: 16
