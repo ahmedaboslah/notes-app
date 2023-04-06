@@ -9,30 +9,71 @@ class AddNoteBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16,right: 16,bottom: 10),
+    return const Padding(
+      padding:  EdgeInsets.only(left: 16,right: 16,bottom: 10),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 24,
-            ),
-            CustomTextField(
-              Text: 'Title',
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            CustomTextField(
-              Text: 'Content',
-              maxlines: 5,
-            ),
-           SizedBox(
-              height: 50,
-            ),
-            CustomBttom()
-          ],
-        ),
+        child: AddNoteFrom(),
+      ),
+    );
+  }
+}
+
+class AddNoteFrom extends StatefulWidget {
+  const AddNoteFrom({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<AddNoteFrom> createState() => _AddNoteFromState();
+}
+
+class _AddNoteFromState extends State<AddNoteFrom> {
+
+  final GlobalKey<FormState> formkey=GlobalKey();
+  AutovalidateMode AutoValidate=AutovalidateMode.disabled;
+  String? Title,Subtitle;
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: formkey,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 24,
+          ),
+          CustomTextField(
+            onsaved: (value) {
+              Title=value;
+            },
+            Text: 'Title',
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          CustomTextField(
+            onsaved: (value){
+              Subtitle=value;
+            },
+            Text: 'Content',
+            maxlines: 5,
+          ),
+         SizedBox(
+            height: 50,
+          ),
+          CustomBttom(
+            ontap: () {
+              if(formkey.currentState!.validate()){
+                formkey.currentState!.save();
+              }
+              else{
+                AutoValidate =AutovalidateMode.always;
+                setState(() {
+                  
+                });
+              }
+            },
+          )
+        ],
       ),
     );
   }
